@@ -68,7 +68,6 @@ public class MouseLook : MonoBehaviour
             Quaternion yQuaternion = Quaternion.AngleAxis(-rotationY, Vector3.right);
             transform.localRotation = originalRotation * yQuaternion;
         }
-        Debug.Log(rotationX.ToString() + rotationY.ToString());
     }
 
     void Start()

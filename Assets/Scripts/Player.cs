@@ -40,7 +40,9 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
+        
         UpdateMove();
+        
         if (vel.magnitude != 0)
         {
             cam.transform.localPosition = camAnchor + HeadBob.getHeadOffset(Time.deltaTime);
