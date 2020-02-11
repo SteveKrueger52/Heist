@@ -70,4 +70,17 @@ public class Player : MonoBehaviour
         // Apply Velocity
         rb.velocity = vel;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Junction enter = other.gameObject.GetComponent<Junction>();
+        Junction approach = other.gameObject.GetComponentInParent<Junction>();
+
+        if (enter != null)
+            enter.OnEnter();
+        if (approach != null)
+            approach.OnApproach();
+            
+            
+    }
 }

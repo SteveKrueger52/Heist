@@ -1,38 +1,49 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Stressor : MonoBehaviour
 {
     //TODO dummy class for base Stressor instantiation
-    AudioSource[] audios;
-    public AudioSource sightSound;
-    public AudioSource approachSound;
-    public AudioSource enterSound;
+    AudioSource audioSource;
+    
+    [Serializable]
+    public struct StressorSound
+    {
+        public AudioClip track;
+        public bool vo; // SFX if not
+    }
+    public StressorSound sightSound;
+    public StressorSound approachSound;
+    public StressorSound enterSound;
+    
 
     private void Start()
     {
-        audios = GetComponents<AudioSource>();
-        sightSound = audios[0];
-        sightSound = audios[1];
-        sightSound = audios[2];
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void OnSight()
     {
         // play animation when player enters adjacent junction
-        sightSound.Play();
+        audioSource.clip = sightSound.track;
+        audioSource.volume = (sightSound.vo ? GameManager.voVolume : GameManager.sfxVolume) / 100;
+        audioSource.Play();
     }
 
     public void OnApproach()
     {
         // play animation when player approaches junction
-        approachSound.Play();
+        audioSource.clip = approachSound.track;
+        audioSource.volume = (approachSound.vo ? GameManager.voVolume : GameManager.sfxVolume) / 100;
+        audioSource.Play();
     }
 
     public void OnEnter()
     {
         // play animation when player enters junction
-        enterSound.Play();
+        audioSource.clip = enterSound.track;
+        audioSource.volume = (enterSound.vo ? GameManager.voVolume : GameManager.sfxVolume) / 100;
+        audioSource.Play();
     }
 }

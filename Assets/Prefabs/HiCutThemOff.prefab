@@ -1,16 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5517325274837259321
+--- !u!1001 &578379175738610024
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4164507011707474578, guid: 5cc4a56d1068d4459b2257b0e0825a01,
+        type: 3}
+      propertyPath: enterSound.track
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b91eaf60c9cfdd45bbceff8676d7bef, type: 3}
+    - target: {fileID: 4164507011707474578, guid: 5cc4a56d1068d4459b2257b0e0825a01,
+        type: 3}
+      propertyPath: approachSound.track
+      value: 
+      objectReference: {fileID: 8300000, guid: 00059b4a9268bf947925ea966f1ce943, type: 3}
+    - target: {fileID: 4164507011707474578, guid: 5cc4a56d1068d4459b2257b0e0825a01,
+        type: 3}
+      propertyPath: sightSound.track
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b91eaf60c9cfdd45bbceff8676d7bef, type: 3}
     - target: {fileID: 6778883375456298390, guid: 5cc4a56d1068d4459b2257b0e0825a01,
         type: 3}
       propertyPath: m_Name
-      value: Empty
+      value: HiCutThemOff
       objectReference: {fileID: 0}
     - target: {fileID: 8475077888179367251, guid: 5cc4a56d1068d4459b2257b0e0825a01,
         type: 3}
