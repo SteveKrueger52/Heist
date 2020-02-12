@@ -26958,6 +26958,7 @@ MonoBehaviour:
   maxDeltaSpeed: 0.5
   movementDeadzone: 0.1
   heldItems: {fileID: 1543012779}
+  briefcase: {fileID: 479783419}
   HeadBob:
     HeadBob: 1
     ItemBob: 1

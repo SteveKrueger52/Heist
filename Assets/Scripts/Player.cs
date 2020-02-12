@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     public GameObject heldItems;
     private Vector3 handAnchor;
+    public GameObject briefcase;
 
     // See Bottom for implementation
     public AnimCurveSet HeadBob;
@@ -38,6 +39,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Input.GetButtonDown("Fire1") && Vector3.Distance(this.transform.position, this.briefcase.transform.position) > 5)
+        {
+            Manager.alarm = true;
+            briefcase.SetActive(false);
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
         
