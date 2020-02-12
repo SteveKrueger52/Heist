@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Stressor", order = 1)]
 public class Stressor : ScriptableObject
 {
+    [Serializable]
     public struct StressorSound
     {
         public AudioClip track;
