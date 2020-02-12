@@ -79,6 +79,8 @@ public class Manager : MonoBehaviour
         tracks[0].Play();
         tracks[1].Play();
         tracks[2].Play();
+        
+        Analytics.StartTrial();
     }
 
     private void Update()
