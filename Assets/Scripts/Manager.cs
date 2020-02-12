@@ -4,28 +4,9 @@ using UnityEngine.Serialization;
 
 public class Manager : MonoBehaviour
 {
-    private static Manager _instance;
-    public static Manager instance
-    {
-        get
-        {
-            if (!_instance)
-                _instance = new Manager();
-            return _instance;
-        }
-        private set { }
-    }
+    public static Manager instance;
 
-    private static bool _alarm;
-    public static bool alarm
-    {
-        get { return _alarm; }
-        set
-        {
-            _alarm = value;
-            _instance.SetAlarm(_alarm);
-        }
-    }
+    public static bool alarm = false;
     
     public AudioSource speaker; // GameObject should have 3 AudioSources, 2 BGMs and a VO. Attached to Player Object
     private AudioSource[] tracks;
@@ -48,8 +29,9 @@ public class Manager : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance != null)
+        if (instance != null)
             Destroy(this);
+        instance = this;
         
         tracks = speaker.gameObject.GetComponents<AudioSource>();
         
@@ -90,19 +72,26 @@ public class Manager : MonoBehaviour
             crossfadeTimer -= Time.deltaTime;
             if (crossfadeTimer > 0)
             {
-                tracks[0].volume = bgmVolume * (crossfadeTimer / crossfadeLength);
-                tracks[1].volume = bgmVolume * (1 - crossfadeTimer / crossfadeLength);
+                tracks[0].volume = bgmVolume / 100 * (crossfadeTimer / crossfadeLength);
+                tracks[1].volume = bgmVolume / 100 * (1 - crossfadeTimer / crossfadeLength);
             }
             else
             {
                 tracks[0].volume = 0;
-                tracks[1].volume = 1;
+                tracks[1].volume = bgmVolume / 100;
             }
             
         }
     }
+
+    public static void SetAlarm()
+    {
+        Debug.Log("Briefcase Obtained");
+        alarm = true;
+        instance._SetAlarm();
+    }
     
-    private void SetAlarm(bool alarmState)
+    private void _SetAlarm()
     {
         crossfadeTimer = crossfadeLength;
         crossfading = true;

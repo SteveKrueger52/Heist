@@ -58,6 +58,8 @@ public class Junction : MonoBehaviour
     // Called when Player.OnTriggerEnter procs on this Junction's Trigger
     public void OnEnter()
     {
+        Analytics.RecordPosition();
+        
         if (Manager.alarm)
             postAlarm.GetComponent<Stressor>().OnEnter();
         else
@@ -75,6 +77,8 @@ public class Junction : MonoBehaviour
     // Called when Player.OnTriggerEnter procs on this Junction's Appoach Trigger
     public void OnApproach()
     {
+        Analytics.RecordPosition();
+        
         if (Manager.alarm)
             postAlarm.GetComponent<Stressor>().OnApproach();
         else
