@@ -1,11 +1,15 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
+using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))]
 public class Junction : MonoBehaviour
 {
-    public Transform preAlarm;
-    public Transform postAlarm;
+    public Stressor preAlarm;
+    public Stressor postAlarm;
+
+    private AudioSource audio;
     public Exit[] exits;
 
     private bool flipped;
@@ -26,13 +30,8 @@ public class Junction : MonoBehaviour
                 Debug.Log("RECIPROCITY FAILED AT " + ToString());
         }
         //*/
-        preAlarm = Instantiate(preAlarm, transform);
-        postAlarm = Instantiate(postAlarm, transform);
+        audio = GetComponent<AudioSource>();
         
-        preAlarm.localPosition = Vector3.zero;
-        postAlarm.localPosition = Vector3.zero;
-        
-        postAlarm.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -40,8 +39,6 @@ public class Junction : MonoBehaviour
         if (Manager.alarm && !flipped)
         {
             flipped = !flipped;
-            preAlarm.gameObject.SetActive(false);
-            postAlarm.gameObject.SetActive(true);
         }
     }
 
@@ -59,18 +56,18 @@ public class Junction : MonoBehaviour
     public void OnEnter()
     {
         Analytics.RecordPosition();
-        
-        if (Manager.alarm)
-            postAlarm.GetComponent<Stressor>().OnEnter();
-        else
-            preAlarm.GetComponent<Stressor>().OnEnter();
+
+        audio.clip = Manager.alarm ? postAlarm.enterSound.track : preAlarm.enterSound.track;
+        audio.volume = ((Manager.alarm ? postAlarm.enterSound.vo : preAlarm.enterSound.vo) 
+                           ? Manager.instance.voVolume : Manager.instance.sfxVolume) / 100;
+        audio.Play();
 
         foreach (Exit exit in exits)
         {
             if (Manager.alarm)
-                exit.next.postAlarm.GetComponent<Stressor>().OnSight();
+                exit.next.OnSight();
             else
-                exit.next.preAlarm.GetComponent<Stressor>().OnSight();
+                exit.next.OnSight();
         }
     }
     
@@ -79,9 +76,17 @@ public class Junction : MonoBehaviour
     {
         Analytics.RecordPosition();
         
-        if (Manager.alarm)
-            postAlarm.GetComponent<Stressor>().OnApproach();
-        else
-            preAlarm.GetComponent<Stressor>().OnEnter();
+        audio.clip = Manager.alarm ? postAlarm.approachSound.track : preAlarm.approachSound.track;
+        audio.volume = ((Manager.alarm ? postAlarm.approachSound.vo : preAlarm.approachSound.vo) 
+                           ? Manager.instance.voVolume : Manager.instance.sfxVolume) / 100;
+        audio.Play();
+    }
+
+    public void OnSight()
+    {
+        audio.clip = Manager.alarm ? postAlarm.sightSound.track : preAlarm.sightSound.track;
+        audio.volume = ((Manager.alarm ? postAlarm.sightSound.vo : preAlarm.sightSound.vo) 
+                           ? Manager.instance.voVolume : Manager.instance.sfxVolume) / 100;
+        audio.Play();
     }
 }

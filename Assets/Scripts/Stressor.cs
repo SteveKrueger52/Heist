@@ -1,13 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
-public class Stressor : MonoBehaviour
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Stressor", order = 1)]
+public class Stressor : ScriptableObject
 {
-    //TODO dummy class for base Stressor instantiation
-    AudioSource audioSource;
-    
-    [Serializable]
     public struct StressorSound
     {
         public AudioClip track;
@@ -16,34 +11,4 @@ public class Stressor : MonoBehaviour
     public StressorSound sightSound;
     public StressorSound approachSound;
     public StressorSound enterSound;
-    
-
-    private void OnAwake()
-    {
-        audioSource = GetComponentInParent<AudioSource>();
-    }
-
-    public void OnSight()
-    {
-        // play animation when player enters adjacent junction
-        audioSource.clip = sightSound.track;
-        audioSource.volume = (sightSound.vo ? Manager.instance.voVolume : Manager.instance.sfxVolume) / 100;
-        audioSource.Play();
-    }
-
-    public void OnApproach()
-    {
-        // play animation when player approaches junction
-        audioSource.clip = approachSound.track;
-        audioSource.volume = (approachSound.vo ? Manager.instance.voVolume : Manager.instance.sfxVolume) / 100;
-        audioSource.Play();
-    }
-
-    public void OnEnter()
-    {
-        // play animation when player enters junction
-        audioSource.clip = enterSound.track;
-        audioSource.volume = (enterSound.vo ? Manager.instance.voVolume : Manager.instance.sfxVolume) / 100;
-        audioSource.Play();
-    }
 }

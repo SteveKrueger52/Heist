@@ -184,10 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3279be5ecaf014a1eb1b8f95c5ce4699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preAlarm: {fileID: 8475077888179367251, guid: 5cc4a56d1068d4459b2257b0e0825a01,
-    type: 3}
-  postAlarm: {fileID: 8475077888179367251, guid: 5cc4a56d1068d4459b2257b0e0825a01,
-    type: 3}
+  preAlarm: {fileID: 0}
+  postAlarm: {fileID: 0}
   exits: []
 --- !u!135 &2444728943420894761
 SphereCollider:
@@ -213,7 +211,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
