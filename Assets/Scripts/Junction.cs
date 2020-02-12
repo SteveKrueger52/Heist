@@ -4,8 +4,8 @@ using UnityEngine.Experimental.PlayerLoop;
 
 public class Junction : MonoBehaviour
 {
-    public Stressor preAlarm;
-    public Stressor postAlarm;
+    public Transform preAlarm;
+    public Transform postAlarm;
     public Exit[] exits;
 
     private bool flipped;
@@ -26,21 +26,18 @@ public class Junction : MonoBehaviour
                 Debug.Log("RECIPROCITY FAILED AT " + ToString());
         }
         //*/
-        preAlarm = Instantiate(preAlarm);
-        postAlarm = Instantiate(postAlarm);
+        preAlarm = Instantiate(preAlarm, transform);
+        postAlarm = Instantiate(postAlarm, transform);
         
-        preAlarm.transform.SetParent(transform);
-        postAlarm.transform.SetParent(transform);
-        
-        preAlarm.transform.localPosition = Vector3.zero;
-        postAlarm.transform.localPosition = Vector3.zero;
+        preAlarm.localPosition = Vector3.zero;
+        postAlarm.localPosition = Vector3.zero;
         
         postAlarm.gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        if (GameManager.alarm && !flipped)
+        if (Manager.alarm && !flipped)
         {
             flipped = !flipped;
             preAlarm.gameObject.SetActive(false);
@@ -61,26 +58,26 @@ public class Junction : MonoBehaviour
     // Called when Player.OnTriggerEnter procs on this Junction's Trigger
     public void OnEnter()
     {
-        if (GameManager.alarm)
-            postAlarm.OnEnter();
+        if (Manager.alarm)
+            postAlarm.GetComponent<Stressor>().OnEnter();
         else
-            preAlarm.OnEnter();
+            preAlarm.GetComponent<Stressor>().OnEnter();
 
         foreach (Exit exit in exits)
         {
-            if (GameManager.alarm)
-                exit.next.postAlarm.OnSight();
+            if (Manager.alarm)
+                exit.next.postAlarm.GetComponent<Stressor>().OnSight();
             else
-                exit.next.preAlarm.OnSight();
+                exit.next.preAlarm.GetComponent<Stressor>().OnSight();
         }
     }
     
     // Called when Player.OnTriggerEnter procs on this Junction's Appoach Trigger
     public void OnApproach()
     {
-        if (GameManager.alarm)
-            postAlarm.OnApproach();
+        if (Manager.alarm)
+            postAlarm.GetComponent<Stressor>().OnApproach();
         else
-            preAlarm.OnEnter();
+            preAlarm.GetComponent<Stressor>().OnEnter();
     }
 }

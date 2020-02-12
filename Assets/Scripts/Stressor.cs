@@ -18,16 +18,16 @@ public class Stressor : MonoBehaviour
     public StressorSound enterSound;
     
 
-    private void Start()
+    private void OnAwake()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponentInParent<AudioSource>();
     }
 
     public void OnSight()
     {
         // play animation when player enters adjacent junction
         audioSource.clip = sightSound.track;
-        audioSource.volume = (sightSound.vo ? GameManager.voVolume : GameManager.sfxVolume) / 100;
+        audioSource.volume = (sightSound.vo ? Manager.instance.voVolume : Manager.instance.sfxVolume) / 100;
         audioSource.Play();
     }
 
@@ -35,7 +35,7 @@ public class Stressor : MonoBehaviour
     {
         // play animation when player approaches junction
         audioSource.clip = approachSound.track;
-        audioSource.volume = (approachSound.vo ? GameManager.voVolume : GameManager.sfxVolume) / 100;
+        audioSource.volume = (approachSound.vo ? Manager.instance.voVolume : Manager.instance.sfxVolume) / 100;
         audioSource.Play();
     }
 
@@ -43,7 +43,7 @@ public class Stressor : MonoBehaviour
     {
         // play animation when player enters junction
         audioSource.clip = enterSound.track;
-        audioSource.volume = (enterSound.vo ? GameManager.voVolume : GameManager.sfxVolume) / 100;
+        audioSource.volume = (enterSound.vo ? Manager.instance.voVolume : Manager.instance.sfxVolume) / 100;
         audioSource.Play();
     }
 }

@@ -2,18 +2,18 @@
 using UnityEngine.Serialization;
 
 
-public class GameManager : MonoBehaviour
+public class Manager : MonoBehaviour
 {
-    private static GameManager _instance;
-    private static GameManager instance
+    private static Manager _instance;
+    public static Manager instance
     {
         get
         {
             if (!_instance)
-                _instance = new GameManager();
+                _instance = new Manager();
             return _instance;
         }
-        set { }
+        private set { }
     }
 
     private static bool _alarm;
@@ -34,9 +34,12 @@ public class GameManager : MonoBehaviour
     private float crossfadeTimer;
     private bool crossfading;
 
-    [Range(0, 100)] public static float bgmVolume;
-    [Range(0, 100)] public static float voVolume;
-    [Range(0, 100)] public static float sfxVolume;
+    [Range(0, 100)] 
+    public float bgmVolume;
+    [Range(0, 100)] 
+    public float voVolume;
+    [Range(0, 100)] 
+    public float sfxVolume;
 
     public AudioClip bgmHi;
     public AudioClip bgmLo;
@@ -59,7 +62,7 @@ public class GameManager : MonoBehaviour
         
         // Set BGM Tracks
         tracks[0].clip = bgmLo;
-        tracks[0].volume = bgmVolume;
+        tracks[0].volume = bgmVolume / 100;
         tracks[0].loop = true;
         
         tracks[1].clip = bgmHi;
@@ -67,14 +70,14 @@ public class GameManager : MonoBehaviour
         tracks[1].loop = true;
         
         tracks[2].clip = voStart;
-        tracks[2].volume = voVolume;
+        tracks[2].volume = voVolume / 100;
         tracks[2].loop = false;
     }
 
     private void Start()
     {
+        tracks[0].Play();
         tracks[1].Play();
-        tracks[2].Play();
         tracks[2].Play();
     }
 
