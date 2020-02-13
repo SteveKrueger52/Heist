@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,9 +16,9 @@ public class Results : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         
-        timeIn.text = Analytics.instance.timer_in.ToString();
-        timeOut.text = (Analytics.instance.timer - Analytics.instance.timer_in).ToString();
-        timeOut.text = Analytics.instance.timer.ToString();
+        timeIn.text = Mathf.Round(Analytics.timer_in) + " sec";
+        timeOut.text = Mathf.Round(Analytics.timer - Analytics.timer_in) + " sec";
+        timeTotal.text = Mathf.Round(Analytics.timer) + " sec";
     }
 
     public void Title()
@@ -30,10 +28,20 @@ public class Results : MonoBehaviour
 
     public void WriteFile()
     {
-        string file = Analytics.instance.log;
-        string path = "Assets/Resources/Logs/" + filename + ".txt";
-        
-        StreamWriter writer = new StreamWriter(path, true);
+        string file = Analytics.log;
+        string dir = Application.persistentDataPath + "/Logs";
+        string path =  dir + "/" + filename + ".txt";
+
+        if (!Directory.Exists(dir))
+            Directory.CreateDirectory(dir);
+
+        int increment = 0;
+        while (File.Exists(path))
+        {
+            path = dir + "/" + filename + "_" + increment + ".txt";
+        }
+
+        StreamWriter writer = File.CreateText(path);
         writer.Write(file);
         writer.Close();
     }

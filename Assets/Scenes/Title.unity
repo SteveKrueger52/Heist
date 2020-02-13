@@ -427,6 +427,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 0
   timer_in: 0
+  log: 
+  logDelay: 1
 --- !u!4 &845292020
 Transform:
   m_ObjectHideFlags: 0

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb07e4cf8a75f40e584a1f894c3038d7, type: 3}
-  m_Name: Hi_Footsteps
+  m_Name: Hi_ThatWay
   m_EditorClassIdentifier: 
   sightSound:
-    track: {fileID: 8300000, guid: 1d76294351b3b6147b63afde9e9aa6a5, type: 3}
-    vo: 0
-  approachSound:
     track: {fileID: 8300000, guid: 8b91eaf60c9cfdd45bbceff8676d7bef, type: 3}
     vo: 0
+  approachSound:
+    track: {fileID: 8300000, guid: 44c8f409b9794364280616ff12d5ade9, type: 3}
+    vo: 1
   enterSound:
-    track: {fileID: 8300000, guid: 34c5976cdcf06324a8a98080732853f2, type: 3}
+    track: {fileID: 8300000, guid: 8b91eaf60c9cfdd45bbceff8676d7bef, type: 3}
     vo: 0

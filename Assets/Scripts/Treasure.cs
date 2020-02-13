@@ -16,7 +16,7 @@ public class Treasure : MonoBehaviour
         if (!Manager.alarm && r < range && Input.GetKeyDown(KeyCode.E))
         {
             // Grab Briefcase
-            // Analytics.StoreMidpoint();
+            Analytics.StoreMidpoint();
             Manager.SetAlarm();
             
             transform.SetParent(hand);

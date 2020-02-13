@@ -6,7 +6,7 @@ public class Manager : MonoBehaviour
 {
     public static Manager instance;
 
-    public static bool alarm = false;
+    public static bool alarm;
     
     public AudioSource speaker; // GameObject should have 3 AudioSources, 2 BGMs and a VO. Attached to Player Object
     private AudioSource[] tracks;

@@ -7,7 +7,7 @@ public class Junction : MonoBehaviour
     public Stressor preAlarm;
     public Stressor postAlarm;
 
-    private AudioSource audio;
+    public AudioSource audioSource;
     public Exit[] exits;
 
     private bool flipped;
@@ -28,8 +28,6 @@ public class Junction : MonoBehaviour
                 Debug.Log("RECIPROCITY FAILED AT " + ToString());
         }
         //*/
-        audio = GetComponent<AudioSource>();
-        
     }
 
     private void Update()
@@ -55,10 +53,10 @@ public class Junction : MonoBehaviour
     {
         Analytics.RecordPosition();
 
-        audio.clip = Manager.alarm ? postAlarm.enterSound.track : preAlarm.enterSound.track;
-        audio.volume = ((Manager.alarm ? postAlarm.enterSound.vo : preAlarm.enterSound.vo) 
+        audioSource.clip = Manager.alarm ? postAlarm.enterSound.track : preAlarm.enterSound.track;
+        audioSource.volume = ((Manager.alarm ? postAlarm.enterSound.vo : preAlarm.enterSound.vo) 
                            ? Manager.instance.voVolume : Manager.instance.sfxVolume) / 100;
-        audio.Play();
+        audioSource.Play();
 
         foreach (Exit exit in exits)
         {
@@ -74,17 +72,20 @@ public class Junction : MonoBehaviour
     {
         Analytics.RecordPosition();
         
-        audio.clip = Manager.alarm ? postAlarm.approachSound.track : preAlarm.approachSound.track;
-        audio.volume = ((Manager.alarm ? postAlarm.approachSound.vo : preAlarm.approachSound.vo) 
+        audioSource.clip = 
+            Manager.alarm ? 
+                postAlarm.approachSound.track : 
+                preAlarm.approachSound.track;
+        audioSource.volume = ((Manager.alarm ? postAlarm.approachSound.vo : preAlarm.approachSound.vo) 
                            ? Manager.instance.voVolume : Manager.instance.sfxVolume) / 100;
-        audio.Play();
+        audioSource.Play();
     }
 
     public void OnSight()
     {
-        audio.clip = Manager.alarm ? postAlarm.sightSound.track : preAlarm.sightSound.track;
-        audio.volume = ((Manager.alarm ? postAlarm.sightSound.vo : preAlarm.sightSound.vo) 
+        audioSource.clip = Manager.alarm ? postAlarm.sightSound.track : preAlarm.sightSound.track;
+        audioSource.volume = ((Manager.alarm ? postAlarm.sightSound.vo : preAlarm.sightSound.vo) 
                            ? Manager.instance.voVolume : Manager.instance.sfxVolume) / 100;
-        audio.Play();
+        audioSource.Play();
     }
 }

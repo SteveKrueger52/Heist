@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 780489372}
   - component: {fileID: 780489371}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: Time_Total
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -461,7 +461,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 12345
+  m_Text: total
 --- !u!222 &780489373
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -847,7 +847,7 @@ GameObject:
   - component: {fileID: 1315050883}
   - component: {fileID: 1315050882}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: Time_Out
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -923,7 +923,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 12345
+  m_Text: out
 --- !u!222 &1315050884
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1265,9 +1265,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d5ca059e1539487083760e29ba8675c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeIn: {fileID: 0}
-  timeOut: {fileID: 0}
-  timeTotal: {fileID: 0}
+  timeIn: {fileID: 1888719180}
+  timeOut: {fileID: 1315050883}
+  timeTotal: {fileID: 780489372}
+  filename: {fileID: 1807708176}
 --- !u!4 &1660305835
 Transform:
   m_ObjectHideFlags: 0
@@ -2101,7 +2102,7 @@ GameObject:
   - component: {fileID: 1888719180}
   - component: {fileID: 1888719179}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: Time_In
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2177,7 +2178,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 12345
+  m_Text: in
 --- !u!222 &1888719181
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2513,12 +2514,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1660305833}
-        m_MethodName: 
+      - m_Target: {fileID: 1660305834}
+        m_MethodName: WriteFile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

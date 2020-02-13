@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Vent : MonoBehaviour
@@ -14,7 +12,8 @@ public class Vent : MonoBehaviour
         if (Manager.alarm && r < range && Input.GetKeyDown(KeyCode.E))
         {
             // End Scene
-            // Analytics.EndTrial();
+            
+            Analytics.EndTrial();
             SceneManager.LoadScene(2);
         }
     }
